@@ -1,0 +1,46 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="utility:connected_apps" size="small"></lightning-icon>
+            Google Books Api callout from LWC
+        </h3>
+        <div slot="footer">
+            Showing up results {startNum} to {endNum} out of {totalItems} total items<br>
+        </div>
+        <div class="slds-var-p-around_medium lgc-bg">
+            <lightning-button label="First" onclick={getFirstPage} aura:id="firstButton" disabled={fbDisabled}></lightning-button>
+            &nbsp;&nbsp;
+            <lightning-button label="Previous" onclick={getPrevData} aura:id="prevButton" disabled={pbDisabled}></lightning-button>
+            &nbsp;&nbsp;
+            <lightning-button label="Next" onclick={getNextData} aura:id="nextButton" disabled={nbDisabled}></lightning-button>
+            &nbsp;&nbsp;
+            <lightning-button label="Last" onclick={getLastPage} aura:id="lastButton" disabled={lbDisabled}></lightning-button>
+            &nbsp;&nbsp;
+
+            <div class="slds-float_right">
+                <h3 style="font-weight: bold;">
+                    Page {currentPage}/{totalPages}
+                </h3>
+            </div>
+
+            <div style="max-width: 120px;">
+                <lightning-combobox
+                    name="progress"
+                    label="Page selector"
+                    value={cbxValue}
+                    placeholder="Select Page"
+                    options={cbxOptions}
+                    onchange={handleChange} ></lightning-combobox>
+            </div>
+        </div>
+
+        <div style="height: 300px;">
+            <lightning-datatable
+                    key-field="id"
+                    data={data}
+                    columns={columns}>
+            </lightning-datatable>
+        </div>   
+    </lightning-card>
+</template>
